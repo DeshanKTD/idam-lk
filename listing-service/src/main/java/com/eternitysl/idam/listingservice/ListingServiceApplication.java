@@ -10,16 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @SpringBootApplication
 @EnableEurekaClient
 @RefreshScope
-@Controller
 public class ListingServiceApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(ListingServiceApplication.class, args);
-	}
-
-	@RequestMapping(value = "/")
-	public String welcomeText() {
-		return "Hello";
 	}
 
 }
