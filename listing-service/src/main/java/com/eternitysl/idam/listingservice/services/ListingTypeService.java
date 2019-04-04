@@ -3,6 +3,7 @@ package com.eternitysl.idam.listingservice.services;
 import com.eternitysl.idam.listingservice.entities.ListingType;
 import com.eternitysl.idam.listingservice.exceptions.ResourceDuplicateException;
 import com.eternitysl.idam.listingservice.exceptions.ResourceNotFoundException;
+import com.eternitysl.idam.listingservice.repositories.ListingSubTypeRepository;
 import com.eternitysl.idam.listingservice.repositories.ListingTypeRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,9 @@ public class ListingTypeService {
 
     @Autowired
     ListingTypeRepository listingTypeRepository;
+
+    @Autowired
+    ListingSubTypeRepository listingSubTypeRepository;
 
     /**
      * Retrieve all Listing Types

@@ -2,6 +2,7 @@ package com.eternitysl.idam.listingservice.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -17,6 +18,7 @@ public class ListingType {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @Column(name = "name", unique = true)

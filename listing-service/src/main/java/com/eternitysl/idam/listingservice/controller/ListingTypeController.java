@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/listing-type")
+@RequestMapping("/listing-type/main")
 public class ListingTypeController {
 
     @Autowired

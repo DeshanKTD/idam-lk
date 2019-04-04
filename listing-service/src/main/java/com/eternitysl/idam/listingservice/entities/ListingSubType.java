@@ -1,6 +1,8 @@
 package com.eternitysl.idam.listingservice.entities;
 
+import com.eternitysl.idam.listingservice.entities.deserializers.ListingTypeDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -23,6 +25,7 @@ public class ListingSubType {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "main_type", nullable = false)
+    @JsonDeserialize(using = ListingTypeDeserializer.class)
     private ListingType mainType;
 
     @Temporal(TemporalType.TIMESTAMP)

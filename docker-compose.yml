@@ -1,0 +1,53 @@
+version: '3'
+services:
+  eureka-server:
+    container_name: eureka-registry-server
+    build:
+      context: ./eureka-registry-service
+      dockerfile: Dockerfile
+
+    restart: on-failure
+
+    ports:
+      - 8761:8761
+    volumes:
+      - /data/eureka-registry-server
+    
+
+  cloud-config-server:
+    container_name: cloud-config-server
+    build:
+      context: ./cloud-config-service
+      dockerfile: Dockerfile
+    
+    restart: on-failure
+
+    ports:
+      - 8888:8888
+
+    volumes:
+      - /data/cloud-config-server
+
+    depends_on:
+      - eureka-server
+
+    links:
+      - eureka-server
+
+  listing-service:
+    container_name: listing_service
+    build:
+      context: ./listing-service
+      dockerfile: Dockerfile
+
+    ports:
+      - 8685:8685
+
+    volumes:
+      - /data/listing-service
+
+    depends_on:
+      - cloud-config-server
+    
+    links:
+      - cloud-config-server
