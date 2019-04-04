@@ -1,45 +1,48 @@
 package com.eternitysl.idam.listingservice.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "listing_types")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-        allowGetters = true)
 public class ListingType {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
+    @NotBlank(message = "Need a Listing Type Name")
     private String name;
 
-    @OneToMany(mappedBy = "mainType")
+    @OneToMany(mappedBy = "mainType", fetch = FetchType.LAZY)
     private Set<ListingSubType> subTypes;
 
-    @OneToMany(mappedBy = "mainType")
+    @OneToMany(mappedBy = "mainType", fetch = FetchType.LAZY)
     private Set<PriceRate> priceRates;
 
-    @OneToMany(mappedBy = "mainType")
+    @OneToMany(mappedBy = "mainType", fetch = FetchType.LAZY)
     private Set<Availability> availabilities;
 
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+    @CreationTimestamp
+    @JsonIgnore
     private Date createdAt;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
+    @UpdateTimestamp
+    @JsonIgnore
     private Date updatedAt;
 
     public ListingType() {
@@ -49,32 +52,41 @@ public class ListingType {
         return name;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
+
+
+    @JsonIgnore
     public Set<ListingSubType> getSubTypes() {
         return subTypes;
     }
 
-    public int getId() {
-        return id;
-    }
-
+    @JsonIgnore
     public Set<PriceRate> getPriceRates() {
         return priceRates;
     }
 
+    @JsonIgnore
     public Set<Availability> getAvailabilities() {
         return availabilities;
     }
 
+    @JsonIgnore
     public Date getCreatedAt() {
         return createdAt;
     }
 
+    @JsonIgnore
     public Date getUpdatedAt() {
         return updatedAt;
     }
+
+
 }
 
