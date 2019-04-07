@@ -1,6 +1,11 @@
 package com.eternitysl.idam.listingservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "availabilities")
@@ -16,6 +21,17 @@ public class Availability {
     @ManyToOne
     @JoinColumn(name = "main_type", nullable = false)
     private ListingType mainType;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @JsonIgnore
+    private Date createdAt;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
+    @JsonIgnore
+    private Date updatedAt;
 
     public Availability() {
 
