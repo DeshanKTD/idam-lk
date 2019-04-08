@@ -40,7 +40,6 @@ public class PriceRateDTO {
         this.name = name;
     }
 
-    @JsonIgnore
     public String getMainType() {
         return mainType;
     }

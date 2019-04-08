@@ -1,6 +1,7 @@
 package com.eternitysl.idam.listingservice.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,6 +21,7 @@ public class Availability {
 
     @ManyToOne
     @JoinColumn(name = "main_type", nullable = false)
+    @JsonProperty
     private ListingType mainType;
 
     @Temporal(TemporalType.TIMESTAMP)
