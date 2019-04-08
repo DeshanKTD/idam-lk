@@ -1,7 +1,6 @@
 package com.eternitysl.idam.listingservice.services;
 
 import com.eternitysl.idam.listingservice.entities.ListingSubType;
-import com.eternitysl.idam.listingservice.entities.ListingType;
 import com.eternitysl.idam.listingservice.exceptions.ResourceDuplicateException;
 import com.eternitysl.idam.listingservice.exceptions.ResourceNotFoundException;
 import com.eternitysl.idam.listingservice.repositories.ListingSubTypeRepository;
@@ -38,6 +37,7 @@ public class ListingSubTypeService {
 
     /**
      * Get sub listing type by id
+     *
      * @param stringId - string id of sub listing type
      * @return ListingSubType object
      */
@@ -54,9 +54,16 @@ public class ListingSubTypeService {
 
     }
 
-    public ListingSubType create(ListingSubType listingSubType){
-        if(isExists(listingSubType.getName())){
-            throw new ResourceDuplicateException("ListingSubType","name",listingSubType.getName());
+
+    /**
+     * Create a new listing sub type
+     *
+     * @param listingSubType - ListingSubType object
+     * @return - Created ListingSubType
+     */
+    public ListingSubType create(ListingSubType listingSubType) {
+        if (isExists(listingSubType.getName())) {
+            throw new ResourceDuplicateException("ListingSubType", "name", listingSubType.getName());
         }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(String.format("Create ListingSubType %s ", listingSubType.getName()));
@@ -67,11 +74,18 @@ public class ListingSubTypeService {
     }
 
 
-    public ListingSubType update(String stringId, ListingSubType listingSubType){
+    /**
+     * Update a existing listing sub type
+     *
+     * @param stringId       - ListingSubType stringId
+     * @param listingSubType - ListingSubType object
+     * @return updated ListingSubType object
+     */
+    public ListingSubType update(String stringId, ListingSubType listingSubType) {
         ListingSubType listingSubTypeSearched = this.getSubTypeById(stringId);
 
-        if(isExists(listingSubType.getName())){
-            throw new ResourceDuplicateException("ListingSubType","name",listingSubType.getName());
+        if (isExists(listingSubType.getName())) {
+            throw new ResourceDuplicateException("ListingSubType", "name", listingSubType.getName());
         }
 
         listingSubTypeSearched.setMainType(listingSubType.getMainType());
@@ -86,7 +100,13 @@ public class ListingSubTypeService {
         return updatedList;
     }
 
-    public boolean delete(String stringId){
+    /**
+     * Delete selected ListingSubType
+     *
+     * @param stringId - String ID of deleting listing sub type
+     * @return
+     */
+    public boolean delete(String stringId) {
         ListingSubType listingSubType = this.getSubTypeById(stringId);
         listingSubTypeRepository.delete(listingSubType);
 
@@ -103,11 +123,6 @@ public class ListingSubTypeService {
             return false;
         return true;
     }
-
-
-
-
-
 
 
 }

@@ -1,11 +1,10 @@
 package com.eternitysl.idam.listingservice.entities;
 
-import com.eternitysl.idam.listingservice.entities.deserializers.ListingTypeDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,11 +20,11 @@ public class ListingSubType {
 
     @Column(name = "name", unique = true)
     @NotBlank(message = "The Sub Listing Name cannot be blank")
-    private String  name;
+    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "main_type", nullable = false)
-    @JsonDeserialize(using = ListingTypeDeserializer.class)
+    @JsonProperty
     private ListingType mainType;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -3,6 +3,7 @@ package com.eternitysl.idam.listingservice.controller;
 import com.eternitysl.idam.listingservice.dto.AvalilabilityDTO;
 import com.eternitysl.idam.listingservice.entities.Availability;
 import com.eternitysl.idam.listingservice.services.AvailabilityService;
+import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class AvailabilityController {
     @Autowired
     private AvailabilityService availabilityService;
 
+    @Autowired
+    private ListingTypeService listingTypeService;
+
     @GetMapping
     public List<Availability> getAll() {
         return availabilityService.getAll();
@@ -24,12 +28,14 @@ public class AvailabilityController {
 
     @PostMapping
     public Availability createListingSubType(@Valid @RequestBody AvalilabilityDTO avalilabilityDTO) {
+        avalilabilityDTO.setListingTypeService(listingTypeService);
         return availabilityService.create(avalilabilityDTO.convert());
     }
 
     @PutMapping("/{id}")
     public Availability updateListingSubType(@PathVariable(value = "id") String id,
                                              @Valid @RequestBody AvalilabilityDTO avalilabilityDTO) {
+        avalilabilityDTO.setListingTypeService(listingTypeService);
         return availabilityService.update(id, avalilabilityDTO.convert());
     }
 

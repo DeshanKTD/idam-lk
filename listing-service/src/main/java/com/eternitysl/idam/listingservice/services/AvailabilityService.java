@@ -18,6 +18,11 @@ public class AvailabilityService {
     @Autowired
     private AvailabilityRepository availabilityRepository;
 
+    /**
+     * Get all availability types
+     *
+     * @return List of Availability
+     */
     public List<Availability> getAll() {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("All availability types started to return");
@@ -25,6 +30,13 @@ public class AvailabilityService {
         return availabilityRepository.findAll();
     }
 
+
+    /**
+     * Get specific availability type
+     *
+     * @param stringId - String ID by ID
+     * @return Selected Availability type
+     */
     public Availability getAvailabilityType(String stringId) {
 
         List<Availability> availabilities = availabilityRepository.findByName(stringId);
@@ -39,6 +51,13 @@ public class AvailabilityService {
         return availabilities.get(0);
     }
 
+
+    /**
+     * Create a new Availability type
+     *
+     * @param availability - Availability type
+     * @return Created Availability object
+     */
     public Availability create(Availability availability) {
         if (isExists(availability.getName())) {
             throw new ResourceDuplicateException("Availability", "name", availability.getName());
@@ -51,6 +70,14 @@ public class AvailabilityService {
         return availabilityRepository.save(availability);
     }
 
+
+    /**
+     * Update a Availability
+     *
+     * @param stringId     - availability string id
+     * @param availability - changing availability object
+     * @return changed Availability object
+     */
     public Availability update(String stringId, Availability availability) {
         Availability availabilitySearched = this.getAvailabilityType(stringId);
 
@@ -64,6 +91,12 @@ public class AvailabilityService {
         return availabilityRepository.save(availabilitySearched);
     }
 
+    /**
+     * Delete existing Availability type
+     *
+     * @param stringId - Deleted availability ID
+     * @return True if success
+     */
     public boolean delete(String stringId) {
         Availability listingTypeSearched = getAvailabilityType(stringId);
         availabilityRepository.delete(listingTypeSearched);

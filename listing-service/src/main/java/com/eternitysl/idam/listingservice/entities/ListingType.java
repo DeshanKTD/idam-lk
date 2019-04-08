@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -54,15 +53,13 @@ public class ListingType {
         return name;
     }
 
-    public int getId(){
-        return this.id;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-
+    public int getId() {
+        return this.id;
+    }
 
     @JsonIgnore
     public Set<ListingSubType> getSubTypes() {

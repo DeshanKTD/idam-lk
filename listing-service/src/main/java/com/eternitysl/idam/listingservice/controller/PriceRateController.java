@@ -1,9 +1,9 @@
 package com.eternitysl.idam.listingservice.controller;
 
-import com.eternitysl.idam.listingservice.dto.AvalilabilityDTO;
 import com.eternitysl.idam.listingservice.dto.PriceRateDTO;
-import com.eternitysl.idam.listingservice.entities.Availability;
+import com.eternitysl.idam.listingservice.entities.ListingType;
 import com.eternitysl.idam.listingservice.entities.PriceRate;
+import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import com.eternitysl.idam.listingservice.services.PriceRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +13,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/price-rate")
 public class PriceRateController {
 
     @Autowired
     private PriceRateService priceRateService;
+
+    @Autowired
+    private ListingTypeService listingTypeService;
 
     @GetMapping
     public List<PriceRate> getAll() {
@@ -26,12 +29,14 @@ public class PriceRateController {
 
     @PostMapping
     public PriceRate createListingSubType(@Valid @RequestBody PriceRateDTO priceRateDTO) {
+        priceRateDTO.setListingTypeService(listingTypeService);
         return priceRateService.create(priceRateDTO.convert());
     }
 
     @PutMapping("/{id}")
     public PriceRate updateListingSubType(@PathVariable(value = "id") String id,
-                                             @Valid @RequestBody PriceRateDTO priceRateDTO) {
+                                          @Valid @RequestBody PriceRateDTO priceRateDTO) {
+        priceRateDTO.setListingTypeService(listingTypeService);
         return priceRateService.update(id, priceRateDTO.convert());
     }
 

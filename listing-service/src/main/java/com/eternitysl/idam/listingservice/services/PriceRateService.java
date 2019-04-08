@@ -19,6 +19,11 @@ public class PriceRateService {
     @Autowired
     private PriceRateRepository priceRateRepository;
 
+    /**
+     * Get all price rates
+     *
+     * @return list of price rates
+     */
     public List<PriceRate> getAll() {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("All availability types started to return");
@@ -26,7 +31,13 @@ public class PriceRateService {
         return priceRateRepository.findAll();
     }
 
-    public PriceRate getAvailabilityType(String stringId) {
+    /**
+     * Get a selected price rate
+     *
+     * @param stringId - price rate Id
+     * @return PriceRate object
+     */
+    public PriceRate getPriceRate(String stringId) {
 
         List<PriceRate> priceRates = priceRateRepository.findByName(stringId);
         if (priceRates.isEmpty()) {
@@ -40,6 +51,12 @@ public class PriceRateService {
         return priceRates.get(0);
     }
 
+    /**
+     * Create a new price rate
+     *
+     * @param priceRate - PriceRate object
+     * @return created price rate object
+     */
     public PriceRate create(PriceRate priceRate) {
         if (isExists(priceRate.getName())) {
             throw new ResourceDuplicateException("PriceRate", "name", priceRate.getName());
@@ -52,8 +69,14 @@ public class PriceRateService {
         return priceRateRepository.save(priceRate);
     }
 
+    /**
+     * Update a price rate
+     * @param stringId - Update price rate id
+     * @param priceRate - Changed PriceRate object
+     * @return updated price rate object
+     */
     public PriceRate update(String stringId, PriceRate priceRate) {
-        PriceRate priceRateSearched = this.getAvailabilityType(stringId);
+        PriceRate priceRateSearched = this.getPriceRate(stringId);
 
         if (isExists(priceRate.getName())) {
             throw new ResourceDuplicateException("PriceRate", "name", priceRate.getName());
@@ -65,8 +88,14 @@ public class PriceRateService {
         return priceRateRepository.save(priceRateSearched);
     }
 
+
+    /**
+     * Delete a price rate
+     * @param stringId
+     * @return
+     */
     public boolean delete(String stringId) {
-        PriceRate priceRateSearched = getAvailabilityType(stringId);
+        PriceRate priceRateSearched = getPriceRate(stringId);
         priceRateRepository.delete(priceRateSearched);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(String.format("%s deleted successfully", stringId));

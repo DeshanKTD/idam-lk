@@ -1,5 +1,6 @@
 package com.eternitysl.idam.listingservice.controller;
 
+import com.eternitysl.idam.listingservice.dto.ListingTypeDTO;
 import com.eternitysl.idam.listingservice.entities.ListingType;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,14 @@ public class ListingTypeController {
     }
 
     @PostMapping
-    public ListingType createListingType(@Valid @RequestBody ListingType listingType) {
-        return listingTypeService.create(listingType);
+    public ListingType createListingType(@Valid @RequestBody ListingTypeDTO listingTypeDTO) {
+        return listingTypeService.create(listingTypeDTO.convert());
     }
 
     @PutMapping("/{id}")
-    public ListingType updateListingType(@PathVariable(value = "id") String id, @Valid @RequestBody ListingType listingType) {
-        return listingTypeService.update(id, listingType);
+    public ListingType updateListingType(@PathVariable(value = "id") String id,
+                                         @Valid @RequestBody ListingTypeDTO listingTypeDTO) {
+        return listingTypeService.update(id, listingTypeDTO.convert());
     }
 
     @DeleteMapping("/{id}")

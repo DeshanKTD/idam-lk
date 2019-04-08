@@ -2,9 +2,15 @@ package com.eternitysl.idam.listingservice.dto;
 
 import com.eternitysl.idam.listingservice.entities.Availability;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AvalilabilityDTO {
+
+    @ApiModelProperty(hidden = true)
+    private int id;
+
     private String name;
     private String mainType;
 
@@ -26,6 +32,10 @@ public class AvalilabilityDTO {
         return name;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -36,5 +46,10 @@ public class AvalilabilityDTO {
 
     public void setMainType(String mainType) {
         this.mainType = mainType;
+    }
+
+    @JsonIgnore
+    public void setListingTypeService(ListingTypeService listingTypeService) {
+        this.listingTypeService = listingTypeService;
     }
 }

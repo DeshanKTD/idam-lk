@@ -2,21 +2,28 @@ package com.eternitysl.idam.listingservice.dto;
 
 import com.eternitysl.idam.listingservice.entities.ListingSubType;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.beans.factory.annotation.Configurable;
 
+@Configurable
 public class ListingSubTypeDTO {
 
+    @ApiModelProperty(hidden = true)
     private int id;
+
     private String name;
     private String mainType;
 
-    @Autowired
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private ListingTypeService listingTypeService;
 
     public ListingSubTypeDTO() {
+
     }
 
-    public ListingSubType convert(){
+    public ListingSubType convert() {
         ListingSubType listingSubType = new ListingSubType();
         listingSubType.setName(this.name);
         listingSubType.setMainType(listingTypeService.getListingType(this.mainType));
@@ -26,10 +33,6 @@ public class ListingSubTypeDTO {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -46,5 +49,10 @@ public class ListingSubTypeDTO {
 
     public void setMainType(String mainType) {
         this.mainType = mainType;
+    }
+
+    @JsonIgnore
+    public void setListingTypeService(ListingTypeService listingTypeService) {
+        this.listingTypeService = listingTypeService;
     }
 }
