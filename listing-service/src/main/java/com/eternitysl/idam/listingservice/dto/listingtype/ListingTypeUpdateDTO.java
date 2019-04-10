@@ -1,16 +1,16 @@
-package com.eternitysl.idam.listingservice.dto;
+package com.eternitysl.idam.listingservice.dto.listingtype;
 
 import com.eternitysl.idam.listingservice.entities.ListingType;
 import io.swagger.annotations.ApiModelProperty;
 
-public class ListingTypeDTO {
+public class ListingTypeUpdateDTO {
 
     @ApiModelProperty(hidden = true)
     private int id;
 
     private String name;
 
-    public ListingTypeDTO() {
+    public ListingTypeUpdateDTO() {
     }
 
     public ListingType convert(){

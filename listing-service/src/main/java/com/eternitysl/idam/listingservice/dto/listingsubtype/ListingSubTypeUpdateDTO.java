@@ -1,36 +1,39 @@
-package com.eternitysl.idam.listingservice.dto;
+package com.eternitysl.idam.listingservice.dto.listingsubtype;
 
-import com.eternitysl.idam.listingservice.entities.PriceRate;
+import com.eternitysl.idam.listingservice.entities.ListingSubType;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
-public class PriceRateDTO {
+@Configurable
+public class ListingSubTypeUpdateDTO {
 
     @ApiModelProperty(hidden = true)
     private int id;
-    private  String name;
-    private  String mainType;
 
-    @Autowired
-    ListingTypeService listingTypeService;
+    private String name;
+    private String mainType;
 
-    public PriceRateDTO() {
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
+    private ListingTypeService listingTypeService;
+
+    public ListingSubTypeUpdateDTO() {
+
     }
 
-    public PriceRate convert(){
-        PriceRate priceRate = new PriceRate();
-        priceRate.setName(this.name);
-        priceRate.setMainType(listingTypeService.getListingType(this.mainType));
-
-        return priceRate;
+    public ListingSubType convert() {
+        ListingSubType listingSubType = new ListingSubType();
+        listingSubType.setName(this.name);
+        listingSubType.setMainType(listingTypeService.getListingType(this.mainType));
+        return listingSubType;
     }
+
 
     public int getId() {
         return id;
     }
-
 
     public String getName() {
         return name;

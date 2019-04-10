@@ -1,7 +1,7 @@
 package com.eternitysl.idam.listingservice.controller;
 
-import com.eternitysl.idam.listingservice.dto.PriceRateDTO;
-import com.eternitysl.idam.listingservice.entities.ListingType;
+import com.eternitysl.idam.listingservice.dto.pricerate.PriceRateSummaryDTO;
+import com.eternitysl.idam.listingservice.dto.pricerate.PriceRateUpdateDTO;
 import com.eternitysl.idam.listingservice.entities.PriceRate;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import com.eternitysl.idam.listingservice.services.PriceRateService;
@@ -23,21 +23,32 @@ public class PriceRateController {
     private ListingTypeService listingTypeService;
 
     @GetMapping
-    public List<PriceRate> getAll() {
-        return priceRateService.getAll();
+    public List<PriceRateSummaryDTO> getAll() {
+        List<PriceRate> priceRates = priceRateService.getAll();
+        return PriceRateSummaryDTO.populate(priceRates);
+    }
+
+    @GetMapping("/{id}")
+    public PriceRateSummaryDTO getSelected(@PathVariable(value = "id") String id){
+        PriceRate priceRate = priceRateService.getPriceRate(id);
+        return PriceRateSummaryDTO.populate(priceRate);
     }
 
     @PostMapping
-    public PriceRate createListingSubType(@Valid @RequestBody PriceRateDTO priceRateDTO) {
-        priceRateDTO.setListingTypeService(listingTypeService);
-        return priceRateService.create(priceRateDTO.convert());
+    public PriceRateSummaryDTO createListingSubType(@Valid @RequestBody PriceRateUpdateDTO priceRateUpdateDTO) {
+        priceRateUpdateDTO.setListingTypeService(listingTypeService);
+        PriceRate priceRate = priceRateService.create(priceRateUpdateDTO.convert());
+
+        return PriceRateSummaryDTO.populate(priceRate);
     }
 
     @PutMapping("/{id}")
-    public PriceRate updateListingSubType(@PathVariable(value = "id") String id,
-                                          @Valid @RequestBody PriceRateDTO priceRateDTO) {
-        priceRateDTO.setListingTypeService(listingTypeService);
-        return priceRateService.update(id, priceRateDTO.convert());
+    public PriceRateSummaryDTO updateListingSubType(@PathVariable(value = "id") String id,
+                                          @Valid @RequestBody PriceRateUpdateDTO priceRateUpdateDTO) {
+        priceRateUpdateDTO.setListingTypeService(listingTypeService);
+        PriceRate priceRate = priceRateService.update(id, priceRateUpdateDTO.convert());
+
+        return PriceRateSummaryDTO.populate(priceRate);
     }
 
     @DeleteMapping("/{id}")

@@ -1,39 +1,39 @@
-package com.eternitysl.idam.listingservice.dto;
+package com.eternitysl.idam.listingservice.dto.pricerate;
 
-import com.eternitysl.idam.listingservice.entities.Availability;
+import com.eternitysl.idam.listingservice.entities.PriceRate;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AvalilabilityDTO {
+public class PriceRateUpdateDTO {
 
     @ApiModelProperty(hidden = true)
     private int id;
-
-    private String name;
-    private String mainType;
+    private  String name;
+    private  String mainType;
 
     @Autowired
     ListingTypeService listingTypeService;
 
-    public AvalilabilityDTO() {
+    public PriceRateUpdateDTO() {
     }
 
-    public Availability convert(){
-        Availability availability = new Availability();
-        availability.setName(this.name);
-        availability.setMainType(listingTypeService.getListingType(this.mainType));
+    public PriceRate convert(){
+        PriceRate priceRate = new PriceRate();
+        priceRate.setName(this.name);
+        priceRate.setMainType(listingTypeService.getListingType(this.mainType));
 
-        return availability;
-    }
-
-    public String getName() {
-        return name;
+        return priceRate;
     }
 
     public int getId() {
         return id;
+    }
+
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {

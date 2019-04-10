@@ -1,6 +1,7 @@
 package com.eternitysl.idam.listingservice.controller;
 
-import com.eternitysl.idam.listingservice.dto.ListingSubTypeDTO;
+import com.eternitysl.idam.listingservice.dto.listingsubtype.ListingSubTypeSummaryDTO;
+import com.eternitysl.idam.listingservice.dto.listingsubtype.ListingSubTypeUpdateDTO;
 import com.eternitysl.idam.listingservice.entities.ListingSubType;
 import com.eternitysl.idam.listingservice.services.ListingSubTypeService;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
@@ -22,21 +23,28 @@ public class ListingSubTypeController {
     private ListingTypeService listingTypeService;
 
     @GetMapping
-    public List<ListingSubType> getAll() {
-        return listingSubTypeService.getAll();
+    public List<ListingSubTypeSummaryDTO> getAll() {
+        List<ListingSubType> listingSubTypes = listingSubTypeService.getAll();
+        return ListingSubTypeSummaryDTO.populate(listingSubTypes);
+    }
+
+    @GetMapping("/{id")
+    public ListingSubTypeSummaryDTO getSelected(@PathVariable(value = "id") String id){
+        ListingSubType listingSubType = listingSubTypeService.getSubTypeById(id);
+        return ListingSubTypeSummaryDTO.populate(listingSubType);
     }
 
     @PostMapping
-    public ListingSubType createListingSubType(@Valid @RequestBody ListingSubTypeDTO listingSubTypeDTO) {
-        listingSubTypeDTO.setListingTypeService(this.listingTypeService);
-        return listingSubTypeService.create(listingSubTypeDTO.convert());
+    public ListingSubType createListingSubType(@Valid @RequestBody ListingSubTypeUpdateDTO listingSubTypeUpdateDTO) {
+        listingSubTypeUpdateDTO.setListingTypeService(this.listingTypeService);
+        return listingSubTypeService.create(listingSubTypeUpdateDTO.convert());
     }
 
     @PutMapping("/{id}")
     public ListingSubType updateListingSubType(@PathVariable(value = "id") String id,
-                                               @Valid @RequestBody ListingSubTypeDTO listingSubTypeDTO) {
-        listingSubTypeDTO.setListingTypeService(this.listingTypeService);
-        return listingSubTypeService.update(id, listingSubTypeDTO.convert());
+                                               @Valid @RequestBody ListingSubTypeUpdateDTO listingSubTypeUpdateDTO) {
+        listingSubTypeUpdateDTO.setListingTypeService(this.listingTypeService);
+        return listingSubTypeService.update(id, listingSubTypeUpdateDTO.convert());
     }
 
     @DeleteMapping("/{id}")

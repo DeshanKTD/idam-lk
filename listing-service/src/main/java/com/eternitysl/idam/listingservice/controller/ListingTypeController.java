@@ -1,6 +1,7 @@
 package com.eternitysl.idam.listingservice.controller;
 
-import com.eternitysl.idam.listingservice.dto.ListingTypeDTO;
+import com.eternitysl.idam.listingservice.dto.listingtype.ListingTypeSummaryDTO;
+import com.eternitysl.idam.listingservice.dto.listingtype.ListingTypeUpdateDTO;
 import com.eternitysl.idam.listingservice.entities.ListingType;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +19,29 @@ public class ListingTypeController {
     ListingTypeService listingTypeService;
 
     @GetMapping
-    public List<ListingType> getAllListingTypes() {
-        return listingTypeService.getAll();
+    public List<ListingTypeSummaryDTO> getAllListingTypes() {
+        List<ListingType> listingTypes = listingTypeService.getAll();
+        return ListingTypeSummaryDTO.populate(listingTypes);
     }
 
+
     @GetMapping("/{id}")
-    public ListingType getListingTypeById(@PathVariable(value = "id") String id){
-        return listingTypeService.getListingType(id);
+    public ListingTypeSummaryDTO getListingTypeById(@PathVariable(value = "id") String id) {
+        ListingType listingType = listingTypeService.getListingType(id);
+        return ListingTypeSummaryDTO.populate(listingType);
     }
 
     @PostMapping
-    public ListingType createListingType(@Valid @RequestBody ListingTypeDTO listingTypeDTO) {
-        return listingTypeService.create(listingTypeDTO.convert());
+    public ListingTypeSummaryDTO createListingType(@Valid @RequestBody ListingTypeUpdateDTO listingTypeUpdateDTO) {
+        ListingType listingType = listingTypeService.create(listingTypeUpdateDTO.convert());
+        return ListingTypeSummaryDTO.populate(listingType);
     }
 
     @PutMapping("/{id}")
-    public ListingType updateListingType(@PathVariable(value = "id") String id,
-                                         @Valid @RequestBody ListingTypeDTO listingTypeDTO) {
-        return listingTypeService.update(id, listingTypeDTO.convert());
+    public ListingTypeSummaryDTO updateListingType(@PathVariable(value = "id") String id,
+                                                   @Valid @RequestBody ListingTypeUpdateDTO listingTypeUpdateDTO) {
+        ListingType listingType = listingTypeService.update(id, listingTypeUpdateDTO.convert());
+        return ListingTypeSummaryDTO.populate(listingType);
     }
 
     @DeleteMapping("/{id}")
@@ -45,4 +51,6 @@ public class ListingTypeController {
         }
         return ResponseEntity.notFound().build();
     }
+
+
 }

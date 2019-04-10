@@ -1,13 +1,12 @@
-package com.eternitysl.idam.listingservice.dto;
+package com.eternitysl.idam.listingservice.dto.availability;
 
-import com.eternitysl.idam.listingservice.entities.ListingSubType;
+import com.eternitysl.idam.listingservice.entities.Availability;
 import com.eternitysl.idam.listingservice.services.ListingTypeService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Configurable
-public class ListingSubTypeDTO {
+public class AvailabilityUpdateDTO {
 
     @ApiModelProperty(hidden = true)
     private int id;
@@ -15,28 +14,26 @@ public class ListingSubTypeDTO {
     private String name;
     private String mainType;
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
-    private ListingTypeService listingTypeService;
+    @Autowired
+    ListingTypeService listingTypeService;
 
-    public ListingSubTypeDTO() {
-
+    public AvailabilityUpdateDTO() {
     }
 
-    public ListingSubType convert() {
-        ListingSubType listingSubType = new ListingSubType();
-        listingSubType.setName(this.name);
-        listingSubType.setMainType(listingTypeService.getListingType(this.mainType));
-        return listingSubType;
-    }
+    public Availability convert(){
+        Availability availability = new Availability();
+        availability.setName(this.name);
+        availability.setMainType(listingTypeService.getListingType(this.mainType));
 
-
-    public int getId() {
-        return id;
+        return availability;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setName(String name) {
