@@ -10,24 +10,24 @@ public class ListingTypeSummaryDTO {
     private String name;
     private String localName;
 
-    public ListingTypeSummaryDTO(){
+    public ListingTypeSummaryDTO() {
 
     }
 
-    public static ListingTypeSummaryDTO  populate(ListingType listingType){
+    public static ListingTypeSummaryDTO populate(ListingType listingType) {
         ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
         listingTypeSummaryDTO.id = listingType.getId();
         listingTypeSummaryDTO.name = listingType.getName();
         return listingTypeSummaryDTO;
     }
 
-    public static List<ListingTypeSummaryDTO> populate(List<ListingType> list){
+    public static List<ListingTypeSummaryDTO> populate(List<ListingType> list) {
         List<ListingTypeSummaryDTO> listingTypeSummaryDTOS = new ArrayList<>();
-        for(ListingType listingType: list){
+        for (ListingType listingType : list) {
             listingTypeSummaryDTOS.add(populate(listingType));
         }
 
-        return  listingTypeSummaryDTOS;
+        return listingTypeSummaryDTOS;
     }
 
     public int getId() {

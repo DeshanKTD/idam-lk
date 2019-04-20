@@ -71,7 +71,8 @@ public class PriceRateService {
 
     /**
      * Update a price rate
-     * @param stringId - Update price rate id
+     *
+     * @param stringId  - Update price rate id
      * @param priceRate - Changed PriceRate object
      * @return updated price rate object
      */
@@ -91,6 +92,7 @@ public class PriceRateService {
 
     /**
      * Delete a price rate
+     *
      * @param stringId
      * @return
      */

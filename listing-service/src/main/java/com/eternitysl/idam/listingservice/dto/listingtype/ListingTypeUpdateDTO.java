@@ -13,7 +13,7 @@ public class ListingTypeUpdateDTO {
     public ListingTypeUpdateDTO() {
     }
 
-    public ListingType convert(){
+    public ListingType convert() {
         ListingType listingType = new ListingType();
         listingType.setName(this.name);
         return listingType;

@@ -29,7 +29,7 @@ public class ListingSubTypeController {
     }
 
     @GetMapping("/{id")
-    public ListingSubTypeSummaryDTO getSelected(@PathVariable(value = "id") String id){
+    public ListingSubTypeSummaryDTO getSelected(@PathVariable(value = "id") String id) {
         ListingSubType listingSubType = listingSubTypeService.getSubTypeById(id);
         return ListingSubTypeSummaryDTO.populate(listingSubType);
     }

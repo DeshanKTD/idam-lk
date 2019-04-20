@@ -17,7 +17,7 @@ public class Availability {
     private int id;
 
     @Column(name = "name")
-    private String  name;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "main_type", nullable = false)
@@ -47,12 +47,12 @@ public class Availability {
         return name;
     }
 
-    public ListingType getMainType() {
-        return mainType;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ListingType getMainType() {
+        return mainType;
     }
 
     public void setMainType(ListingType mainType) {

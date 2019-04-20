@@ -9,8 +9,8 @@ public class ResourceDuplicateException extends RuntimeException {
     private String fieldName;
     private Object fieldValue;
 
-    public ResourceDuplicateException(String resourceName, String fieldName, String fieldValue){
-        super(String.format("%s is duplicated with %s : %s",resourceName,fieldName,fieldValue));
+    public ResourceDuplicateException(String resourceName, String fieldName, String fieldValue) {
+        super(String.format("%s is duplicated with %s : %s", resourceName, fieldName, fieldValue));
         this.resouceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;

@@ -29,13 +29,13 @@ public class PriceRateController {
     }
 
     @GetMapping("/{id}")
-    public PriceRateSummaryDTO getSelected(@PathVariable(value = "id") String id){
+    public PriceRateSummaryDTO getSelected(@PathVariable(value = "id") String id) {
         PriceRate priceRate = priceRateService.getPriceRate(id);
         return PriceRateSummaryDTO.populate(priceRate);
     }
 
     @PostMapping
-    public PriceRateSummaryDTO createListingSubType(@Valid @RequestBody PriceRateUpdateDTO priceRateUpdateDTO) {
+    public PriceRateSummaryDTO createPriceRate(@Valid @RequestBody PriceRateUpdateDTO priceRateUpdateDTO) {
         priceRateUpdateDTO.setListingTypeService(listingTypeService);
         PriceRate priceRate = priceRateService.create(priceRateUpdateDTO.convert());
 
@@ -43,8 +43,8 @@ public class PriceRateController {
     }
 
     @PutMapping("/{id}")
-    public PriceRateSummaryDTO updateListingSubType(@PathVariable(value = "id") String id,
-                                          @Valid @RequestBody PriceRateUpdateDTO priceRateUpdateDTO) {
+    public PriceRateSummaryDTO updatePriceRate(@PathVariable(value = "id") String id,
+                                               @Valid @RequestBody PriceRateUpdateDTO priceRateUpdateDTO) {
         priceRateUpdateDTO.setListingTypeService(listingTypeService);
         PriceRate priceRate = priceRateService.update(id, priceRateUpdateDTO.convert());
 
@@ -52,7 +52,7 @@ public class PriceRateController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteListingType(@PathVariable(value = "id") String id) {
+    public ResponseEntity<?> deletePriceRate(@PathVariable(value = "id") String id) {
         if (priceRateService.delete(id)) {
             return ResponseEntity.ok().build();
         }

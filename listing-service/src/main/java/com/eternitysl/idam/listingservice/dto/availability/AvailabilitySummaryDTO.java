@@ -15,7 +15,7 @@ public class AvailabilitySummaryDTO {
     public AvailabilitySummaryDTO() {
     }
 
-    public static AvailabilitySummaryDTO populate(Availability availability){
+    public static AvailabilitySummaryDTO populate(Availability availability) {
         AvailabilitySummaryDTO availabilitySummaryDTO = new AvailabilitySummaryDTO();
 
         ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
@@ -27,10 +27,10 @@ public class AvailabilitySummaryDTO {
         return availabilitySummaryDTO;
     }
 
-    public static List<AvailabilitySummaryDTO> populate(List<Availability> availabilities){
+    public static List<AvailabilitySummaryDTO> populate(List<Availability> availabilities) {
         List<AvailabilitySummaryDTO> availabilitySummaryDTOS = new ArrayList<>();
 
-        for(Availability availability: availabilities){
+        for (Availability availability : availabilities) {
             AvailabilitySummaryDTO availabilitySummaryDTO = populate(availability);
             availabilitySummaryDTOS.add(availabilitySummaryDTO);
         }

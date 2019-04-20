@@ -8,18 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class PriceRateUpdateDTO {
 
-    @ApiModelProperty(hidden = true)
-    private int id;
-    private  String name;
-    private  String mainType;
-
     @Autowired
     ListingTypeService listingTypeService;
+    @ApiModelProperty(hidden = true)
+    private int id;
+    private String name;
+    private String mainType;
 
     public PriceRateUpdateDTO() {
     }
 
-    public PriceRate convert(){
+    public PriceRate convert() {
         PriceRate priceRate = new PriceRate();
         priceRate.setName(this.name);
         priceRate.setMainType(listingTypeService.getListingType(this.mainType));

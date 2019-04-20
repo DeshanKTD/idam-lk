@@ -16,7 +16,7 @@ public class PriceRateSummaryDTO {
     public PriceRateSummaryDTO() {
     }
 
-    public static PriceRateSummaryDTO populate(PriceRate priceRate){
+    public static PriceRateSummaryDTO populate(PriceRate priceRate) {
         PriceRateSummaryDTO priceRateSummaryDTO = new PriceRateSummaryDTO();
 
         ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
@@ -28,10 +28,10 @@ public class PriceRateSummaryDTO {
         return priceRateSummaryDTO;
     }
 
-    public static List<PriceRateSummaryDTO> populate(List<PriceRate> priceRateList){
+    public static List<PriceRateSummaryDTO> populate(List<PriceRate> priceRateList) {
         List<PriceRateSummaryDTO> priceRateSummaryDTOS = new ArrayList<>();
 
-        for(PriceRate priceRate: priceRateList){
+        for (PriceRate priceRate : priceRateList) {
             PriceRateSummaryDTO priceRateSummaryDTO = populate(priceRate);
             priceRateSummaryDTOS.add(priceRateSummaryDTO);
         }

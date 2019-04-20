@@ -34,6 +34,9 @@ services:
     links:
       - eureka-server
 
+    environment:
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://192.168.1.106:8761/eureka"
+
   listing-service:
     container_name: listing_service
     build:

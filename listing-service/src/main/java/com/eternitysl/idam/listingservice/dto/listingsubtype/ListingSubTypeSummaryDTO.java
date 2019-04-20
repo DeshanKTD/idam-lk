@@ -15,7 +15,7 @@ public class ListingSubTypeSummaryDTO {
     public ListingSubTypeSummaryDTO() {
     }
 
-    public static ListingSubTypeSummaryDTO populate(ListingSubType listingSubType){
+    public static ListingSubTypeSummaryDTO populate(ListingSubType listingSubType) {
         ListingSubTypeSummaryDTO listingSubTypeSummaryDTO = new ListingSubTypeSummaryDTO();
 
         ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
@@ -27,12 +27,12 @@ public class ListingSubTypeSummaryDTO {
         return listingSubTypeSummaryDTO;
     }
 
-    public static List<ListingSubTypeSummaryDTO> populate(List<ListingSubType> list){
+    public static List<ListingSubTypeSummaryDTO> populate(List<ListingSubType> list) {
         List<ListingSubTypeSummaryDTO> listingSubTypeSummaryDTOS = new ArrayList<>();
 
-        for(ListingSubType listingSubType: list){
-           ListingSubTypeSummaryDTO listingSubTypeSummaryDTO = populate(listingSubType);
-           listingSubTypeSummaryDTOS.add(listingSubTypeSummaryDTO);
+        for (ListingSubType listingSubType : list) {
+            ListingSubTypeSummaryDTO listingSubTypeSummaryDTO = populate(listingSubType);
+            listingSubTypeSummaryDTOS.add(listingSubTypeSummaryDTO);
         }
 
         return listingSubTypeSummaryDTOS;
@@ -58,11 +58,11 @@ public class ListingSubTypeSummaryDTO {
         return localName;
     }
 
-    public ListingTypeSummaryDTO getMainType() {
-        return mainType;
-    }
-
     public void setLocalName(String localName) {
         this.localName = localName;
+    }
+
+    public ListingTypeSummaryDTO getMainType() {
+        return mainType;
     }
 }

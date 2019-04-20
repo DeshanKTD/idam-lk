@@ -35,7 +35,7 @@ public class AvailabilityController {
     }
 
     @PostMapping
-    public AvailabilitySummaryDTO createListingSubType(@Valid @RequestBody AvailabilityUpdateDTO availabilityUpdateDTO) {
+    public AvailabilitySummaryDTO createAvailabilityType(@Valid @RequestBody AvailabilityUpdateDTO availabilityUpdateDTO) {
         availabilityUpdateDTO.setListingTypeService(listingTypeService);
         Availability availability = availabilityService.create(availabilityUpdateDTO.convert());
 
@@ -43,7 +43,7 @@ public class AvailabilityController {
     }
 
     @PutMapping("/{id}")
-    public AvailabilitySummaryDTO updateListingSubType(@PathVariable(value = "id") String id,
+    public AvailabilitySummaryDTO updateAvailabilityType(@PathVariable(value = "id") String id,
                                              @Valid @RequestBody AvailabilityUpdateDTO availabilityUpdateDTO) {
         availabilityUpdateDTO.setListingTypeService(listingTypeService);
         Availability availability = availabilityService.update(id, availabilityUpdateDTO.convert());
@@ -52,7 +52,7 @@ public class AvailabilityController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteListingType(@PathVariable(value = "id") String id) {
+    public ResponseEntity<?> deleteAvailabilityType(@PathVariable(value = "id") String id) {
         if (availabilityService.delete(id)) {
             return ResponseEntity.ok().build();
         }

@@ -8,19 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class AvailabilityUpdateDTO {
 
-    @ApiModelProperty(hidden = true)
-    private int id;
-
-    private String name;
-    private String mainType;
-
     @Autowired
     ListingTypeService listingTypeService;
+    @ApiModelProperty(hidden = true)
+    private int id;
+    private String name;
+    private String mainType;
 
     public AvailabilityUpdateDTO() {
     }
 
-    public Availability convert(){
+    public Availability convert() {
         Availability availability = new Availability();
         availability.setName(this.name);
         availability.setMainType(listingTypeService.getListingType(this.mainType));
@@ -32,12 +30,12 @@ public class AvailabilityUpdateDTO {
         return name;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getMainType() {
