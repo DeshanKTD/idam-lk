@@ -22,7 +22,7 @@ public class ZoneController {
     private ZoneService zoneService;
 
     @GetMapping("/district")
-    public List<OutboundDistrictDTO> getALlDistricts(){
+    public List<OutboundDistrictDTO> getAllDistricts(){
         return OutboundDistrictDTO.populate(zoneService.getAllDistricts());
     }
 
@@ -67,6 +67,7 @@ public class ZoneController {
 
     @PostMapping("/town")
     public OutboundTownDTO createTown(@Valid @RequestBody InboundTownDTO inboundTownDTO){
+        inboundTownDTO.setZoneService(zoneService);
         Town town = zoneService.createTown(inboundTownDTO.convert());
         return OutboundTownDTO.populate(town);
     }
@@ -74,6 +75,7 @@ public class ZoneController {
     @PutMapping("/town/{id}")
     public OutboundTownDTO updateTown(@PathVariable(value = "id") String id,
                                               @Valid @RequestBody InboundTownDTO inboundTownDTO){
+        inboundTownDTO.setZoneService(zoneService);
         Town town = zoneService.updateTown(id,inboundTownDTO.convert());
         return OutboundTownDTO.populate(town);
     }

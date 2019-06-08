@@ -1,5 +1,7 @@
 package com.eternitysl.idam.common.zones.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Town {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JsonIgnore
     private long id;
 
     @Column(name = "name")

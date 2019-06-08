@@ -10,7 +10,7 @@
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <!--<module>common</module>-->
+        <module>common</module>
         <module>eureka-registry-service</module>
         <module>cloud-config-service</module>
         <module>listing-service</module>

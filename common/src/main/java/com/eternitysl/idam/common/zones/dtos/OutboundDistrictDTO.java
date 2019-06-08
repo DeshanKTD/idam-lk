@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class OutboundDistrictDTO {
-    private long id;
+
     private String name;
     private Set<Town> townList;
 
@@ -31,9 +31,6 @@ public class OutboundDistrictDTO {
         return outboundDistrictDTOS;
     }
 
-    public long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;

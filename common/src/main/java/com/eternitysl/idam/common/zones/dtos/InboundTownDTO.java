@@ -2,11 +2,14 @@ package com.eternitysl.idam.common.zones.dtos;
 
 import com.eternitysl.idam.common.zones.entities.Town;
 import com.eternitysl.idam.common.zones.services.ZoneService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class InboundTownDTO {
 
     private String name;
     private String district;
+
+    @JsonIgnore
     private ZoneService zoneService;
 
     public Town convert(){
@@ -31,5 +34,10 @@ public class InboundTownDTO {
 
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    @JsonIgnore
+    public void setZoneService(ZoneService zoneService) {
+        this.zoneService = zoneService;
     }
 }
