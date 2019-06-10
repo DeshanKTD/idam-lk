@@ -72,6 +72,7 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.2.9.Final</version>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -98,6 +99,8 @@
                     </jvmArguments>
                 </configuration>
             </plugin>
+
+
         </plugins>
     </build>
 

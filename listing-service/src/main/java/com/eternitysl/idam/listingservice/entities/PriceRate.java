@@ -1,6 +1,9 @@
 package com.eternitysl.idam.listingservice.entities;
 
+import com.eternitysl.idam.listingservice.entities.listings.LandListing;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "price_rates")
@@ -16,6 +19,9 @@ public class PriceRate {
     @ManyToOne
     @JoinColumn(name = "main_type", nullable = false)
     private ListingType mainType;
+
+    @OneToMany(mappedBy = "priceRate",fetch = FetchType.LAZY)
+    private Set<LandListing> landListings;
 
     public PriceRate() {
     }

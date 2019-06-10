@@ -1,5 +1,6 @@
 package com.eternitysl.idam.listingservice.entities;
 
+import com.eternitysl.idam.listingservice.entities.listings.LandListing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "availabilities")
@@ -23,6 +25,9 @@ public class Availability {
     @JoinColumn(name = "main_type", nullable = false)
     @JsonProperty
     private ListingType mainType;
+
+    @OneToMany(mappedBy = "availability",fetch = FetchType.LAZY)
+    private Set<LandListing> landListingSet;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
