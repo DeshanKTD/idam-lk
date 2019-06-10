@@ -90,6 +90,7 @@ public class ZoneService {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(String.format("Create Town %s ", town.getName()));
         }
+
         return townRepository.save(town);
     }
 
