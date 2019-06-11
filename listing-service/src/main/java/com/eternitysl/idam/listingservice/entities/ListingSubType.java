@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "listing_subtypes")
@@ -25,6 +26,11 @@ public class ListingSubType {
     @JoinColumn(name = "main_type", nullable = false)
     @JsonProperty
     private ListingType mainType;
+
+
+    @OneToMany(mappedBy = "listingSubType", fetch = FetchType.LAZY)
+    private Set<Listing> listings;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

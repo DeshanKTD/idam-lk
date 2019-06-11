@@ -33,9 +33,6 @@ public class ListingType {
     @OneToMany(mappedBy = "mainType", fetch = FetchType.LAZY)
     private Set<Availability> availabilities;
 
-    @OneToMany(mappedBy = "mainType", fetch = FetchType.LAZY)
-    private Set<Listing> listings;
-
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

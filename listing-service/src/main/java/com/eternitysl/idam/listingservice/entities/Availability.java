@@ -1,10 +1,12 @@
 package com.eternitysl.idam.listingservice.entities;
 
+import com.eternitysl.idam.listingservice.entities.listings.BuildingListing;
 import com.eternitysl.idam.listingservice.entities.listings.LandListing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,6 +30,9 @@ public class Availability {
 
     @OneToMany(mappedBy = "availability",fetch = FetchType.LAZY)
     private Set<LandListing> landListingSet;
+
+    @OneToMany(mappedBy = "availability", fetch = FetchType.LAZY)
+    private Set<BuildingListing> buildingListingSet;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

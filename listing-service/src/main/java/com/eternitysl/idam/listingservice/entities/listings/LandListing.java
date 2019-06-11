@@ -3,7 +3,6 @@ package com.eternitysl.idam.listingservice.entities.listings;
 import com.eternitysl.idam.listingservice.entities.Availability;
 import com.eternitysl.idam.listingservice.entities.Listing;
 import com.eternitysl.idam.listingservice.entities.PriceRate;
-import com.eternitysl.idam.listingservice.entities.constants.UnitType;
 import com.eternitysl.idam.listingservice.entities.listings.landlisting.LandSellingType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,6 +12,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "building_listing")
 public class LandListing extends Listing {
 
     @Id
@@ -22,8 +22,7 @@ public class LandListing extends Listing {
 
     private double landArea;
 
-    @Enumerated(EnumType.STRING)
-    private UnitType landAreaUnit;
+    private String landAreaUnit;
 
     @ManyToOne
     @JoinColumn(name = "price_rate", nullable = false)
@@ -37,6 +36,11 @@ public class LandListing extends Listing {
     @Enumerated(EnumType.STRING)
     private LandSellingType landSellingType;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "listing_id")
+    private Listing listing;
+
+
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @JsonIgnore
@@ -48,6 +52,15 @@ public class LandListing extends Listing {
     @JsonIgnore
     private Date updatedAt;
 
+    @JsonIgnore
+    public Listing getListing() {
+        return listing;
+    }
+
+    @JsonIgnore
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
 
     @Override
     public long getId() {
@@ -62,11 +75,11 @@ public class LandListing extends Listing {
         this.landArea = landArea;
     }
 
-    public UnitType getLandAreaUnit() {
+    public String getLandAreaUnit() {
         return landAreaUnit;
     }
 
-    public void setLandAreaUnit(UnitType landAreaUnit) {
+    public void setLandAreaUnit(String landAreaUnit) {
         this.landAreaUnit = landAreaUnit;
     }
 
@@ -105,4 +118,5 @@ public class LandListing extends Listing {
     public void setLandSellingType(LandSellingType landSellingType) {
         this.landSellingType = landSellingType;
     }
+
 }

@@ -6,9 +6,13 @@ import com.eternitysl.idam.listingservice.entities.constants.UnitType;
 import com.eternitysl.idam.listingservice.entities.listings.buildinglisting.BuildingFeature;
 import com.eternitysl.idam.listingservice.entities.listings.buildinglisting.BuildingRental;
 import com.eternitysl.idam.listingservice.entities.listings.buildinglisting.BuildingSellingType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "building_listing")
 public class BuildingListing extends Listing {
     @Id
     @GeneratedValue
@@ -21,22 +25,24 @@ public class BuildingListing extends Listing {
 
     private double floorArea;
 
-    private UnitType floorAreaUnit;
+    private String floorAreaUnit;
 
     private int floorCount;
 
     private double landArea;
 
-    private UnitType landAreaUnit;
+    private String landAreaUnit;
 
     private double trainDistance;
 
-    private UnitType trainDistanceUnit;
+    private String trainDistanceUnit;
 
-    private double busstopDistance;
+    private double busStopDistance;
 
-    private UnitType busstopDistanceUnit;
+    private String busStopDistanceUnit;
 
+    @ManyToOne
+    @JoinColumn(name = "availability", nullable = false)
     private Availability availability;
 
     private BuildingSellingType buildingSellingType;
@@ -44,12 +50,26 @@ public class BuildingListing extends Listing {
     @OneToOne(mappedBy = "buildingListing",cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
     private BuildingFeature buildingFeature;
 
-    @OneToOne(mappedBy = "buildingListing",cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+    @OneToOne(mappedBy = "buildingListing",cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true)
     private BuildingRental buildingRental;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "listing_id")
+    private Listing listing;
 
     @Override
     public long getId() {
         return id;
+    }
+
+    @JsonIgnore
+    public Listing getListing() {
+        return listing;
+    }
+
+    @JsonIgnore
+    public void setListing(Listing listing) {
+        this.listing = listing;
     }
 
     public int getRoomCount() {
@@ -64,7 +84,7 @@ public class BuildingListing extends Listing {
         return floorArea;
     }
 
-    public UnitType getFloorAreaUnit() {
+    public String getFloorAreaUnit() {
         return floorAreaUnit;
     }
 
@@ -76,7 +96,7 @@ public class BuildingListing extends Listing {
         return landArea;
     }
 
-    public UnitType getLandAreaUnit() {
+    public String getLandAreaUnit() {
         return landAreaUnit;
     }
 
@@ -84,16 +104,16 @@ public class BuildingListing extends Listing {
         return trainDistance;
     }
 
-    public UnitType getTrainDistanceUnit() {
+    public String getTrainDistanceUnit() {
         return trainDistanceUnit;
     }
 
-    public double getBusstopDistance() {
-        return busstopDistance;
+    public double getBusStopDistance() {
+        return busStopDistance;
     }
 
-    public UnitType getBusstopDistanceUnit() {
-        return busstopDistanceUnit;
+    public String getBusStopDistanceUnit() {
+        return busStopDistanceUnit;
     }
 
     public Availability getAvailability() {
@@ -124,7 +144,7 @@ public class BuildingListing extends Listing {
         this.floorArea = floorArea;
     }
 
-    public void setFloorAreaUnit(UnitType floorAreaUnit) {
+    public void setFloorAreaUnit(String floorAreaUnit) {
         this.floorAreaUnit = floorAreaUnit;
     }
 
@@ -136,7 +156,7 @@ public class BuildingListing extends Listing {
         this.landArea = landArea;
     }
 
-    public void setLandAreaUnit(UnitType landAreaUnit) {
+    public void setLandAreaUnit(String landAreaUnit) {
         this.landAreaUnit = landAreaUnit;
     }
 
@@ -144,16 +164,16 @@ public class BuildingListing extends Listing {
         this.trainDistance = trainDistance;
     }
 
-    public void setTrainDistanceUnit(UnitType trainDistanceUnit) {
+    public void setTrainDistanceUnit(String trainDistanceUnit) {
         this.trainDistanceUnit = trainDistanceUnit;
     }
 
-    public void setBusstopDistance(double busstopDistance) {
-        this.busstopDistance = busstopDistance;
+    public void setBusStopDistance(double busStopDistance) {
+        this.busStopDistance = busStopDistance;
     }
 
-    public void setBusstopDistanceUnit(UnitType busstopDistanceUnit) {
-        this.busstopDistanceUnit = busstopDistanceUnit;
+    public void setBusStopDistanceUnit(String busStopDistanceUnit) {
+        this.busStopDistanceUnit = busStopDistanceUnit;
     }
 
     public void setAvailability(Availability availability) {
