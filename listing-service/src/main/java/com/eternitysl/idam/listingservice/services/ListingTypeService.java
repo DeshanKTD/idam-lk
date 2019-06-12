@@ -85,6 +85,7 @@ public class ListingTypeService {
             LOGGER.debug(String.format("Updating ListingType %s ", stringId));
         }
         listingTypeSearched.setName(listingType.getName());
+        listingTypeSearched.setLocalName(listingType.getLocalName());
         ListingType updateListingType = listingTypeRepository.save(listingTypeSearched);
 
         return updateListingType;

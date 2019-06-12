@@ -9,18 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PriceRateUpdateDTO {
 
     @Autowired
-    ListingTypeService listingTypeService;
+    private ListingTypeService listingTypeService;
     @ApiModelProperty(hidden = true)
     private int id;
     private String name;
     private String mainType;
+
 
     public PriceRateUpdateDTO() {
     }
 
     public PriceRate convert() {
         PriceRate priceRate = new PriceRate();
-        priceRate.setName(this.name);
+        priceRate.setName(this.name.replace(" ","_").toLowerCase());
+        priceRate.setLocalName(this.name);
         priceRate.setMainType(listingTypeService.getListingType(this.mainType));
 
         return priceRate;
@@ -51,4 +53,6 @@ public class PriceRateUpdateDTO {
     public void setListingTypeService(ListingTypeService listingTypeService) {
         this.listingTypeService = listingTypeService;
     }
+
+
 }

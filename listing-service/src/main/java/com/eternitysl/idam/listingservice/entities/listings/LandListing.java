@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "building_listing")
-public class LandListing extends Listing {
+public class LandListing{
 
     @Id
     @GeneratedValue
@@ -62,7 +62,6 @@ public class LandListing extends Listing {
         this.listing = listing;
     }
 
-    @Override
     public long getId() {
         return id;
     }
@@ -99,13 +98,12 @@ public class LandListing extends Listing {
         this.availability = availability;
     }
 
-    @Override
+
     @JsonIgnore
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    @Override
     @JsonIgnore
     public Date getUpdatedAt() {
         return updatedAt;

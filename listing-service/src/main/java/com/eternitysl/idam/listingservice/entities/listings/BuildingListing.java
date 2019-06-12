@@ -8,12 +8,15 @@ import com.eternitysl.idam.listingservice.entities.listings.buildinglisting.Buil
 import com.eternitysl.idam.listingservice.entities.listings.buildinglisting.BuildingSellingType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "building_listing")
-public class BuildingListing extends Listing {
+public class BuildingListing {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -41,10 +44,22 @@ public class BuildingListing extends Listing {
 
     private String busStopDistanceUnit;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @JsonIgnore
+    private Date createdAt;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
+    @JsonIgnore
+    private Date updatedAt;
+
     @ManyToOne
     @JoinColumn(name = "availability", nullable = false)
     private Availability availability;
 
+    @Enumerated(EnumType.STRING)
     private BuildingSellingType buildingSellingType;
 
     @OneToOne(mappedBy = "buildingListing",cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
@@ -57,7 +72,6 @@ public class BuildingListing extends Listing {
     @JoinColumn(name = "listing_id")
     private Listing listing;
 
-    @Override
     public long getId() {
         return id;
     }
@@ -190,5 +204,13 @@ public class BuildingListing extends Listing {
 
     public void setBuildingRental(BuildingRental buildingRental) {
         this.buildingRental = buildingRental;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 }

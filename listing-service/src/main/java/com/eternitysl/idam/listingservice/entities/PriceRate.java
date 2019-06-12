@@ -16,6 +16,9 @@ public class PriceRate {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "local_name")
+    private String localName;
+
     @ManyToOne
     @JoinColumn(name = "main_type", nullable = false)
     private ListingType mainType;
@@ -44,5 +47,13 @@ public class PriceRate {
 
     public void setMainType(ListingType mainType) {
         this.mainType = mainType;
+    }
+
+    public String getLocalName() {
+        return localName;
+    }
+
+    public void setLocalName(String localName) {
+        this.localName = localName;
     }
 }

@@ -87,6 +87,7 @@ public class AvailabilityService {
 
         availabilitySearched.setMainType(availability.getMainType());
         availabilitySearched.setName(availability.getName());
+        availabilitySearched.setLocalName(availability.getLocalName());
 
         return availabilityRepository.save(availabilitySearched);
     }

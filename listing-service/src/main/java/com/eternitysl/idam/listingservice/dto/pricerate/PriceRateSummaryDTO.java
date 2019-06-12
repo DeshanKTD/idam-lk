@@ -19,11 +19,12 @@ public class PriceRateSummaryDTO {
     public static PriceRateSummaryDTO populate(PriceRate priceRate) {
         PriceRateSummaryDTO priceRateSummaryDTO = new PriceRateSummaryDTO();
 
-        ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
-        listingTypeSummaryDTO.populate(priceRate.getMainType());
+        ListingTypeSummaryDTO listingTypeSummaryDTO = ListingTypeSummaryDTO.populate(priceRate.getMainType());
 
         priceRateSummaryDTO.id = priceRate.getId();
         priceRateSummaryDTO.name = priceRate.getName();
+        priceRateSummaryDTO.localName = priceRate.getLocalName();
+        priceRateSummaryDTO.mainType = listingTypeSummaryDTO;
 
         return priceRateSummaryDTO;
     }

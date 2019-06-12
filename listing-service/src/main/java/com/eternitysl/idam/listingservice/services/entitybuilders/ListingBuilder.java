@@ -11,9 +11,15 @@ import org.springframework.stereotype.Service;
 public class ListingBuilder {
 
     @Autowired
-    private static ListingSubTypeService listingSubTypeService;
+    private ListingSubTypeService listingSubTypeService;
 
-    public static Listing createListing(ListingInboundDTO listingInboundDTO){
+    @Autowired
+    private LandListingBuilder landListingBuilder;
+
+    @Autowired
+    private BuildingListingBuilder buildingListingBuilder;
+
+    public Listing createListing(ListingInboundDTO listingInboundDTO){
         Listing listing = new Listing();
         listing.setAddedBy(listingInboundDTO.getAddedBy());
         listing.setTitle(listingInboundDTO.getTitle());
@@ -23,8 +29,12 @@ public class ListingBuilder {
         listing.setContactName(listingInboundDTO.getContactName());
         listing.setContactNumber(listingInboundDTO.getContactNumber());
         listing.setListingSubType(listingSubTypeService.getSubTypeById(listingInboundDTO.getListingSubType()));
-        listing.setLandListing(LandListingBuilder.createLandListing(listingInboundDTO.getLandListing()));
-        listing.setBuildingListing(BuildingListingBuilder.createBuildingListing(listingInboundDTO.getBuildingListing()));
+        if(listingInboundDTO.getLandListing()!=null) {
+            listing.setLandListing(landListingBuilder.createLandListing(listingInboundDTO.getLandListing()));
+        }
+        if(listingInboundDTO.getBuildingListing()!=null) {
+            listing.setBuildingListing(buildingListingBuilder.createBuildingListing(listingInboundDTO.getBuildingListing()));
+        }
 
         return listing;
     }

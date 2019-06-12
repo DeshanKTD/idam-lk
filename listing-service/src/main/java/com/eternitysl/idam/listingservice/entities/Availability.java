@@ -23,6 +23,10 @@ public class Availability {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "local_name")
+    private String localName;
+
+
     @ManyToOne
     @JoinColumn(name = "main_type", nullable = false)
     @JsonProperty
@@ -67,5 +71,13 @@ public class Availability {
 
     public void setMainType(ListingType mainType) {
         this.mainType = mainType;
+    }
+
+    public String getLocalName() {
+        return localName;
+    }
+
+    public void setLocalName(String localName) {
+        this.localName = localName;
     }
 }

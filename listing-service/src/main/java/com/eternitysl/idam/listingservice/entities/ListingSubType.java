@@ -22,6 +22,12 @@ public class ListingSubType {
     @NotBlank(message = "The Sub Listing Name cannot be blank")
     private String name;
 
+    @Column(name = "local_name", unique = true)
+    @NotBlank(message = "The Sub Listing Local Name cannot be blank")
+    private String localName;
+
+
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "main_type", nullable = false)
     @JsonProperty
@@ -76,5 +82,13 @@ public class ListingSubType {
     @JsonIgnore
     public Date getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getLocalName() {
+        return localName;
+    }
+
+    public void setLocalName(String localName) {
+        this.localName = localName;
     }
 }

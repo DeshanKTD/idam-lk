@@ -85,6 +85,7 @@ public class PriceRateService {
 
         priceRateSearched.setMainType(priceRate.getMainType());
         priceRateSearched.setName(priceRate.getName());
+        priceRateSearched.setLocalName(priceRate.getLocalName());
 
         return priceRateRepository.save(priceRateSearched);
     }

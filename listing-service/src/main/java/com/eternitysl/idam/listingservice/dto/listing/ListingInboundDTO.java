@@ -11,8 +11,6 @@ public class ListingInboundDTO {
     private String contactName;
     private String contactNumber;
     private String listingSubType;
-    private String nameUri;
-    private String orderAt;
     private int price;
     private LandListingInboundDTO landListing;
     private BuildingListingInboundDTO buildingListing;
@@ -64,22 +62,6 @@ public class ListingInboundDTO {
 
     public void setListingSubType(String listingSubType) {
         this.listingSubType = listingSubType;
-    }
-
-    public String getNameUri() {
-        return nameUri;
-    }
-
-    public void setNameUri(String nameUri) {
-        this.nameUri = nameUri;
-    }
-
-    public String getOrderAt() {
-        return orderAt;
-    }
-
-    public void setOrderAt(String orderAt) {
-        this.orderAt = orderAt;
     }
 
     public int getPrice() {

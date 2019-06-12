@@ -20,8 +20,9 @@ public class AvailabilityUpdateDTO {
 
     public Availability convert() {
         Availability availability = new Availability();
-        availability.setName(this.name);
+        availability.setName(this.name.replace(" ","_").toLowerCase());
         availability.setMainType(listingTypeService.getListingType(this.mainType));
+        availability.setLocalName(this.name);
 
         return availability;
     }

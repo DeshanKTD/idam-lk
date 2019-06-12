@@ -19,9 +19,12 @@ public class ListingController {
     @Autowired
     private ListingService listingService;
 
+    @Autowired
+    private ListingBuilder listingBuilder;
+
     @PostMapping
     public Listing createListing(@Valid @RequestBody ListingInboundDTO listingInboundDTO) {
-        Listing listing = ListingBuilder.createListing(listingInboundDTO);
+        Listing listing = listingBuilder.createListing(listingInboundDTO);
         return listingService.create(listing);
     }
 }

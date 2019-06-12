@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "listings")
 public class Listing {
 
@@ -21,13 +21,17 @@ public class Listing {
     @GeneratedValue
     @Column(name = "id")
     private long id;
+
     @Column(name = "addedBy")
     private String addedBy;
+
     @Column(name = "title")
     @NotNull
     private String title;
+
     @Column(name = "description")
     private String description;
+
     @Enumerated(EnumType.STRING)
     @NotNull
     private SellerType sellerType;
@@ -47,19 +51,25 @@ public class Listing {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "listing_sub_type", nullable = false)
     private ListingSubType listingSubType;
+
     @Column(name = "nameUri")
     private String nameUri;
+
     @Column(name = "orderAt")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderAt;
+
     @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true)
     private BuildingListing buildingListing;
+
     @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true)
     private LandListing landListing;
+
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @JsonIgnore
     private Date createdAt;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp

@@ -18,11 +18,12 @@ public class AvailabilitySummaryDTO {
     public static AvailabilitySummaryDTO populate(Availability availability) {
         AvailabilitySummaryDTO availabilitySummaryDTO = new AvailabilitySummaryDTO();
 
-        ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
-        listingTypeSummaryDTO.populate(availability.getMainType());
+        ListingTypeSummaryDTO listingTypeSummaryDTO = ListingTypeSummaryDTO.populate(availability.getMainType());
 
         availabilitySummaryDTO.id = availability.getId();
         availabilitySummaryDTO.name = availability.getName();
+        availabilitySummaryDTO.mainType = listingTypeSummaryDTO;
+        availabilitySummaryDTO.localName = availability.getLocalName();
 
         return availabilitySummaryDTO;
     }

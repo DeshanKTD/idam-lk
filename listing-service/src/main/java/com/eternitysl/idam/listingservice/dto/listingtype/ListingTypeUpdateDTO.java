@@ -15,7 +15,8 @@ public class ListingTypeUpdateDTO {
 
     public ListingType convert() {
         ListingType listingType = new ListingType();
-        listingType.setName(this.name);
+        listingType.setName(this.name.replace(" ","_").toLowerCase());
+        listingType.setLocalName(this.name);
         return listingType;
     }
 

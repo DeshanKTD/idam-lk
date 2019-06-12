@@ -10,7 +10,7 @@ public enum BuildingSellingType {
         this.value = value;
     }
 
-    private static BuildingSellingType fromValue(String value){
+    public static BuildingSellingType fromValue(String value){
         for(BuildingSellingType buildingSellingType: values()){
             if(buildingSellingType.value.equalsIgnoreCase(value)){
                 return buildingSellingType;

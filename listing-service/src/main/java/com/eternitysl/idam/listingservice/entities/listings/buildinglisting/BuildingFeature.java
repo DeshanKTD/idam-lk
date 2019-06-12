@@ -1,6 +1,7 @@
 package com.eternitysl.idam.listingservice.entities.listings.buildinglisting;
 
 import com.eternitysl.idam.listingservice.entities.listings.BuildingListing;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ public class BuildingFeature {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @OneToOne(fetch = FetchType.LAZY)

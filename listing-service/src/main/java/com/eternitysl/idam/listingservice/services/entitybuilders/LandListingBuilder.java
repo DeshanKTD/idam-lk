@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 public class LandListingBuilder {
 
     @Autowired
-    private static PriceRateService priceRateService;
+    private  PriceRateService priceRateService;
 
     @Autowired
-    private static AvailabilityService availabilityService;
+    private  AvailabilityService availabilityService;
 
-    public static LandListing createLandListing(LandListingInboundDTO landListingInboundDTO){
+    public LandListing createLandListing(LandListingInboundDTO landListingInboundDTO){
         LandListing landListing = new LandListing();
         landListing.setLandArea(landListingInboundDTO.getLandArea());
         landListing.setLandAreaUnit(landListingInboundDTO.getLandAreaUnit());

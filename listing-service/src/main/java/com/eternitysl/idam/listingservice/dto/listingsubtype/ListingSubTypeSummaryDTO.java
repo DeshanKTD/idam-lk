@@ -18,11 +18,11 @@ public class ListingSubTypeSummaryDTO {
     public static ListingSubTypeSummaryDTO populate(ListingSubType listingSubType) {
         ListingSubTypeSummaryDTO listingSubTypeSummaryDTO = new ListingSubTypeSummaryDTO();
 
-        ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
-        listingTypeSummaryDTO.populate(listingSubType.getMainType());
+        ListingTypeSummaryDTO listingTypeSummaryDTO = ListingTypeSummaryDTO.populate(listingSubType.getMainType());
         listingSubTypeSummaryDTO.id = listingSubType.getId();
         listingSubTypeSummaryDTO.name = listingSubType.getName();
         listingSubTypeSummaryDTO.mainType = listingTypeSummaryDTO;
+        listingSubTypeSummaryDTO.localName = listingSubType.getLocalName();
 
         return listingSubTypeSummaryDTO;
     }

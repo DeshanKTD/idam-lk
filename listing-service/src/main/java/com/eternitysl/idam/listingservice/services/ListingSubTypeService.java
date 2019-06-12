@@ -90,6 +90,7 @@ public class ListingSubTypeService {
 
         listingSubTypeSearched.setMainType(listingSubType.getMainType());
         listingSubTypeSearched.setName(listingSubType.getName());
+        listingSubTypeSearched.setLocalName(listingSubType.getLocalName());
 
         ListingSubType updatedList = listingSubTypeRepository.save(listingSubTypeSearched);
 

@@ -17,6 +17,7 @@ public class ListingTypeSummaryDTO {
     public static ListingTypeSummaryDTO populate(ListingType listingType) {
         ListingTypeSummaryDTO listingTypeSummaryDTO = new ListingTypeSummaryDTO();
         listingTypeSummaryDTO.id = listingType.getId();
+        listingTypeSummaryDTO.localName = listingType.getLocalName();
         listingTypeSummaryDTO.name = listingType.getName();
         return listingTypeSummaryDTO;
     }

@@ -25,7 +25,8 @@ public class ListingSubTypeUpdateDTO {
 
     public ListingSubType convert() {
         ListingSubType listingSubType = new ListingSubType();
-        listingSubType.setName(this.name);
+        listingSubType.setName(this.name.replace(" ","_").toLowerCase());
+        listingSubType.setLocalName(this.name);
         listingSubType.setMainType(listingTypeService.getListingType(this.mainType));
         return listingSubType;
     }

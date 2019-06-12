@@ -24,6 +24,10 @@ public class ListingType {
     @NotBlank(message = "Need a Listing Type Name")
     private String name;
 
+    @Column(name = "local_name", unique = true)
+    @NotBlank(message = "Need a Listing Type Local Name")
+    private String localName;
+
     @OneToMany(mappedBy = "mainType", fetch = FetchType.LAZY)
     private Set<ListingSubType> subTypes;
 
@@ -86,5 +90,12 @@ public class ListingType {
     }
 
 
+    public String getLocalName() {
+        return localName;
+    }
+
+    public void setLocalName(String localName) {
+        this.localName = localName;
+    }
 }
 

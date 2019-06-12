@@ -4,6 +4,7 @@ import com.eternitysl.idam.listingservice.dto.listing.building.BuildingListingIn
 import com.eternitysl.idam.listingservice.dto.listing.building.BuildingRentalInboundDTO;
 import com.eternitysl.idam.listingservice.entities.listings.BuildingListing;
 import com.eternitysl.idam.listingservice.entities.listings.buildinglisting.BuildingRental;
+import com.eternitysl.idam.listingservice.entities.listings.buildinglisting.BuildingSellingType;
 import com.eternitysl.idam.listingservice.services.AvailabilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,9 @@ import org.springframework.stereotype.Service;
 public class BuildingListingBuilder {
 
     @Autowired
-    private static AvailabilityService availabilityService;
+    private  AvailabilityService availabilityService;
 
-    public static BuildingRental createBuildingRental(BuildingRentalInboundDTO buildingRentalInboundDTO){
+    public BuildingRental createBuildingRental(BuildingRentalInboundDTO buildingRentalInboundDTO){
         BuildingRental buildingRental = new BuildingRental();
         buildingRental.setBillsIncluded(buildingRentalInboundDTO.isBillsIncluded());
         buildingRental.setMinimumTerm(buildingRentalInboundDTO.getMinimumTerm());
@@ -25,7 +26,7 @@ public class BuildingListingBuilder {
         return buildingRental;
     }
 
-    public static BuildingListing createBuildingListing(BuildingListingInboundDTO buildingListingInboundDTO){
+    public BuildingListing createBuildingListing(BuildingListingInboundDTO buildingListingInboundDTO){
         BuildingListing buildingListing = new BuildingListing();
         buildingListing.setRoomCount(buildingListingInboundDTO.getRoomCount());
         buildingListing.setBathroomCount(buildingListingInboundDTO.getBathroomCount());
@@ -33,14 +34,19 @@ public class BuildingListingBuilder {
         buildingListing.setFloorAreaUnit(buildingListingInboundDTO.getFloorAreaUnit());
         buildingListing.setFloorCount(buildingListingInboundDTO.getFloorCount());
         buildingListing.setLandArea(buildingListingInboundDTO.getLandArea());
+        buildingListing.setLandAreaUnit(buildingListingInboundDTO.getLandAreaUnit());
         buildingListing.setFloorAreaUnit(buildingListingInboundDTO.getFloorAreaUnit());
         buildingListing.setTrainDistance(buildingListingInboundDTO.getTrainDistance());
         buildingListing.setTrainDistanceUnit(buildingListingInboundDTO.getTrainDistanceUnit());
         buildingListing.setBusStopDistance(buildingListingInboundDTO.getBusStopDistance());
+        buildingListing.setBusStopDistanceUnit(buildingListingInboundDTO.getBusStopDistanceUnit());
         buildingListing.setTrainDistanceUnit(buildingListingInboundDTO.getBusStopDistanceUnit());
         buildingListing.setAvailability(availabilityService.getAvailabilityType(buildingListingInboundDTO.getAvailability()));
         buildingListing.setBuildingFeature(buildingListingInboundDTO.getBuildingFeature());
-        buildingListing.setBuildingRental(createBuildingRental(buildingListingInboundDTO.getBuildingRental()));
+        buildingListing.setBuildingSellingType(BuildingSellingType.fromValue(buildingListingInboundDTO.getBuildingSellingType()));
+        if(buildingListingInboundDTO.getBuildingRental()!=null) {
+            buildingListing.setBuildingRental(createBuildingRental(buildingListingInboundDTO.getBuildingRental()));
+        }
 
         return buildingListing;
 

@@ -17,6 +17,7 @@ public class BuildingListingInboundDTO {
     private String availability;
     private BuildingFeature buildingFeature;
     private BuildingRentalInboundDTO buildingRental;
+    private String buildingSellingType;
 
     public int getRoomCount() {
         return roomCount;
@@ -128,5 +129,13 @@ public class BuildingListingInboundDTO {
 
     public void setBuildingRental(BuildingRentalInboundDTO buildingRental) {
         this.buildingRental = buildingRental;
+    }
+
+    public String getBuildingSellingType() {
+        return buildingSellingType;
+    }
+
+    public void setBuildingSellingType(String buildingSellingType) {
+        this.buildingSellingType = buildingSellingType;
     }
 }
