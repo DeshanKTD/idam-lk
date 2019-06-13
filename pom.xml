@@ -13,6 +13,7 @@
         <module>common</module>
         <module>eureka-registry-service</module>
         <module>cloud-config-service</module>
+        <module>zuul-proxy-service</module>
         <module>listing-service</module>
     </modules>
 
