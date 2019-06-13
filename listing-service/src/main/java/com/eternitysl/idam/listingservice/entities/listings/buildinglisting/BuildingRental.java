@@ -1,6 +1,5 @@
 package com.eternitysl.idam.listingservice.entities.listings.buildinglisting;
 
-import com.eternitysl.idam.listingservice.entities.constants.UnitType;
 import com.eternitysl.idam.listingservice.entities.listings.BuildingListing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;

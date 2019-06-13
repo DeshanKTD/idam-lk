@@ -1,8 +1,12 @@
 package com.eternitysl.idam.listingservice.services.entitybuilders;
 
 import com.eternitysl.idam.listingservice.dto.listing.ListingInboundDTO;
+import com.eternitysl.idam.listingservice.dto.listing.ListingOutboundDTO;
+import com.eternitysl.idam.listingservice.dto.listingsubtype.ListingSubTypeSummaryDTO;
 import com.eternitysl.idam.listingservice.entities.Listing;
 import com.eternitysl.idam.listingservice.entities.constants.SellerType;
+import com.eternitysl.idam.listingservice.entities.listings.BuildingListing;
+import com.eternitysl.idam.listingservice.entities.listings.LandListing;
 import com.eternitysl.idam.listingservice.services.ListingSubTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +23,7 @@ public class ListingBuilder {
     @Autowired
     private BuildingListingBuilder buildingListingBuilder;
 
-    public Listing createListing(ListingInboundDTO listingInboundDTO){
+    public Listing createListingFromInboundDTO(ListingInboundDTO listingInboundDTO){
         Listing listing = new Listing();
         listing.setAddedBy(listingInboundDTO.getAddedBy());
         listing.setTitle(listingInboundDTO.getTitle());
@@ -30,12 +34,44 @@ public class ListingBuilder {
         listing.setContactNumber(listingInboundDTO.getContactNumber());
         listing.setListingSubType(listingSubTypeService.getSubTypeById(listingInboundDTO.getListingSubType()));
         if(listingInboundDTO.getLandListing()!=null) {
-            listing.setLandListing(landListingBuilder.createLandListing(listingInboundDTO.getLandListing()));
+            LandListing landListing =landListingBuilder.createLandListingFromInboundDTO(listingInboundDTO.getLandListing());
+            landListing.setListing(listing);
+            listing.setLandListing(landListing);
         }
         if(listingInboundDTO.getBuildingListing()!=null) {
-            listing.setBuildingListing(buildingListingBuilder.createBuildingListing(listingInboundDTO.getBuildingListing()));
+            BuildingListing buildingListing = buildingListingBuilder.createBuildingListingFromInboundDTO(listingInboundDTO.getBuildingListing());
+            buildingListing.setListing(listing);
+            listing.setBuildingListing(buildingListing);
+
         }
 
         return listing;
+    }
+
+    public ListingOutboundDTO createListingOutboundDTOFromListing(Listing listing){
+        ListingOutboundDTO listingOutboundDTO = new ListingOutboundDTO();
+        listingOutboundDTO.setAddedBy(listing.getAddedBy());
+        listingOutboundDTO.setTitle(listing.getTitle());
+        listingOutboundDTO.setDescription(listing.getDescription());
+        listingOutboundDTO.setSellerType(listing.getSellerType());
+        listingOutboundDTO.setPrice(listing.getPrice());
+        listingOutboundDTO.setContactName(listing.getContactName());
+        listingOutboundDTO.setContactNumber(listing.getContactNumber());
+        listingOutboundDTO.setNameUri(listing.getNameUri());
+        listingOutboundDTO.setListingSubType(ListingSubTypeSummaryDTO.populate(listing.getListingSubType()));
+        listingOutboundDTO.setCreatedAt(listing.getCreatedAt());
+        if(listing.getBuildingListing()!=null){
+            listingOutboundDTO.setBuildingListing(buildingListingBuilder.createOutboundDTOFromBuidingListing(
+                    listing.getBuildingListing()
+            ));
+        }
+        if(listing.getLandListing()!=null){
+            listingOutboundDTO.setLandListing(landListingBuilder.createOutboundDTOFromLandListing(
+                    listing.getLandListing()
+            ));
+        }
+
+        return listingOutboundDTO;
+
     }
 }

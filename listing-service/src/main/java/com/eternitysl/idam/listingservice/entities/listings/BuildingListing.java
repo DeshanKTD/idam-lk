@@ -15,7 +15,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "building_listing")
+@Table(name = "building_listings")
 public class BuildingListing {
     @Id
     @GeneratedValue

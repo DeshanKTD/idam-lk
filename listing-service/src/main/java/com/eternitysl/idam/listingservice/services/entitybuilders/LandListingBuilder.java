@@ -1,6 +1,9 @@
 package com.eternitysl.idam.listingservice.services.entitybuilders;
 
+import com.eternitysl.idam.listingservice.dto.availability.AvailabilitySummaryDTO;
 import com.eternitysl.idam.listingservice.dto.listing.land.LandListingInboundDTO;
+import com.eternitysl.idam.listingservice.dto.listing.land.LandListingOutboundDTO;
+import com.eternitysl.idam.listingservice.dto.pricerate.PriceRateSummaryDTO;
 import com.eternitysl.idam.listingservice.entities.listings.LandListing;
 import com.eternitysl.idam.listingservice.entities.listings.landlisting.LandSellingType;
 import com.eternitysl.idam.listingservice.services.AvailabilityService;
@@ -17,7 +20,7 @@ public class LandListingBuilder {
     @Autowired
     private  AvailabilityService availabilityService;
 
-    public LandListing createLandListing(LandListingInboundDTO landListingInboundDTO){
+    public LandListing createLandListingFromInboundDTO(LandListingInboundDTO landListingInboundDTO){
         LandListing landListing = new LandListing();
         landListing.setLandArea(landListingInboundDTO.getLandArea());
         landListing.setLandAreaUnit(landListingInboundDTO.getLandAreaUnit());
@@ -26,5 +29,17 @@ public class LandListingBuilder {
         landListing.setLandSellingType(LandSellingType.fromValue(landListingInboundDTO.getLandSellingType()));
 
         return landListing;
+    }
+
+    public LandListingOutboundDTO createOutboundDTOFromLandListing(LandListing landListing){
+        LandListingOutboundDTO landListingOutboundDTO = new LandListingOutboundDTO();
+        landListingOutboundDTO.setLandArea(landListing.getLandArea());
+        landListingOutboundDTO.setLandAreaUnit(landListing.getLandAreaUnit());
+        landListingOutboundDTO.setPriceRate(PriceRateSummaryDTO.populate(landListing.getPriceRate()));
+        landListingOutboundDTO.setAvailability(AvailabilitySummaryDTO.populate(landListing.getAvailability()));
+        landListingOutboundDTO.setLandSellingType(landListing.getLandSellingType());
+
+        return landListingOutboundDTO;
+
     }
 }

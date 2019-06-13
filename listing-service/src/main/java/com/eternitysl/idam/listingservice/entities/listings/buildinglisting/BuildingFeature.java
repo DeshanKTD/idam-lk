@@ -1,6 +1,7 @@
 package com.eternitysl.idam.listingservice.entities.listings.buildinglisting;
 
 import com.eternitysl.idam.listingservice.entities.listings.BuildingListing;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class BuildingFeature {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_listing_id")
+    @JsonIgnore
     private BuildingListing buildingListing;
 
     private boolean acRooms;
@@ -237,5 +239,15 @@ public class BuildingFeature {
 
     public void setWaterTank(boolean waterTank) {
         this.waterTank = waterTank;
+    }
+
+    @JsonIgnore
+    public BuildingListing getBuildingListing() {
+        return buildingListing;
+    }
+
+    @JsonIgnore
+    public void setBuildingListing(BuildingListing buildingListing) {
+        this.buildingListing = buildingListing;
     }
 }
